@@ -1,6 +1,6 @@
 <?php
 /**
- * @package     Slim 4 Base
+ * @package     Helpers package
  *
  * @subpackage  <String manipulation helper functions>
  *
@@ -9,7 +9,6 @@
  * @license     https://opensource.org/licenses/BSD-3-Clause
  *
  * @category    helpers
- * @see         https://www.slimframework.com/docs/v4/
  *
  * @since       2023.11.14
  */

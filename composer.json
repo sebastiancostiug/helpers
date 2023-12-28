@@ -1,0 +1,22 @@
+{
+    "name": "seb/helpers",
+    "description": "A collection of general helpers",
+    "license": "BSD-3-Clause",
+    "type": "helpers",
+    "keywords": [
+        "helpers",
+        "general",
+        "php"
+    ],
+    "require": {
+        "php": "^8.2"
+    },
+    "autoload": {
+        "files": [
+            "./helpers/console.php",
+            "./helpers/app.php",
+            "./helpers/path.php",
+            "./helpers/string.php"
+        ]
+    }
+}
