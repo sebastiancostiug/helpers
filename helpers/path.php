@@ -23,7 +23,7 @@ if (!function_exists('base_path')) {
      */
     function base_path($path = '')
     {
-        return  dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "{$path}";
+        return  dirname(dirname(dirname(dirname(__DIR__)))) . DIRECTORY_SEPARATOR . "{$path}";
     }
 }
 
