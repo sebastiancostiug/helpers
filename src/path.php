@@ -51,7 +51,11 @@ if (!function_exists('core_path')) {
      */
     function core_path($path = '')
     {
-        return base_path("core/{$path}");
+        if (file_exists(base_path("vendor/sebastiancostiug/core/src/{$path}"))) {
+            return base_path("vendor/sebastiancostiug/core/src/{$path}");
+        } else {
+            return app_path("{$path}");
+        }
     }
 }
 
