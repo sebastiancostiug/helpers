@@ -1,6 +1,16 @@
 {
     "name": "sebastiancostiug/helpers",
     "description": "A collection of general helpers",
+    "authors": [
+        {
+            "name": "Sebastian Costiug",
+            "email": "sebastian@overbyte.dev",
+            "homepage": "https://overbyte.dev"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "version": "0.0.1",
     "license": "BSD-3-Clause",
     "type": "helpers",
     "keywords": [
