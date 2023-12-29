@@ -25,7 +25,7 @@
         "files": [
             "./src/app.php",
             "./src/console.php",
-            "./src/files.php",
+            "./src/file.php",
             "./src/i18n.php",
             "./src/path.php",
             "./src/string.php"
