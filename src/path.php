@@ -199,6 +199,20 @@ if (!function_exists('resources_path')) {
     }
 }
 
+if (!function_exists('vendor_path')) {
+    /**
+     * vendor_path().
+     *
+     * @param string $path Vendor path detail
+     *
+     * @return string
+     */
+    function vendor_path($path = '')
+    {
+        return base_path("vendor/{$path}");
+    }
+}
+
 if (!function_exists('routes_path')) {
     /**
      * routes_path().
