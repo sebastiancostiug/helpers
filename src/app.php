@@ -124,7 +124,7 @@ if (!function_exists('config')) {
         foreach ($configFiles as $file) {
             throw_when(str_after($file, '.') !== 'php', 'Config files must be .php files.');
             if (isset($config[str_before($file, '.php')])) {
-                $config[str_before($file, '.php')] = array_merge($config[str_before($file, '.php')], require config_path($file));
+                $config[str_before($file, '.php')] = array_replace_recursive($config[str_before($file, '.php')], require config_path($file));
             } else {
                 data_set($config, str_before($file, '.php'), require config_path($file));
             }
