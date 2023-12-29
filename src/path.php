@@ -212,3 +212,43 @@ if (!function_exists('routes_path')) {
         return app_path("routes/{$path}");
     }
 }
+
+if (!function_exists('classes_from_path')) {
+    /**
+     * classes_from_path().
+     *
+     * @param string $path Path detail
+     *
+     * @return string
+     */
+    function classes_from_path($path)
+    {
+        throw_when(!file_exists($path), "Path {$path} does not exist");
+
+        $classes = [];
+        $handle = opendir($path);
+        while (($file = readdir($handle)) !== false) {
+            if ($file != '.' && $file != '..' && is_file($path . DIRECTORY_SEPARATOR . $file)) {
+                //get namespace from file
+                $namespace = file_get_contents($path . DIRECTORY_SEPARATOR . $file);
+                $namespace = explode("\n", $namespace);
+                $namespace = array_filter($namespace, function ($line) {
+                    return strpos($line, 'namespace') !== false;
+                });
+                $namespace = array_values($namespace);
+                $namespace = str_replace('namespace ', '', $namespace[0]);
+                $namespace = str_replace(';', '', $namespace);
+                $namespace = str_replace("\r", '', $namespace);
+                $namespace = str_replace("\n", '', $namespace);
+                $namespace = str_replace("\t", '', $namespace);
+                $namespace = str_replace(' ', '', $namespace);
+
+                $class = str_replace('.php', '', $file);
+                $classes[] = "{$namespace}\\{$class}";
+            }
+        }
+        closedir($handle);
+
+        return $classes;
+    }
+}
