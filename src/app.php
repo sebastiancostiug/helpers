@@ -13,6 +13,30 @@
  * @since       2023.11.14
  */
 
+if (!function_exists('redirect')) {
+    /**
+     * redirect().
+     *
+     * @param string $url URL to redirect to
+     *
+     * @return mixed
+     */
+    function redirect(string $url)
+    {
+        throw_when(!class_exists(core\http\routing\Redirect::class), 'Redirect class not found.');
+
+        throw_when(!function_exists('app'), 'Application instance not found.');
+
+        try {
+            $redirect = app()->resolve(core\http\routing\Redirect::class);
+
+            return $redirect($url);
+        } catch (\Throwable $th) {
+            throw_when(true, $th->getMessage());
+        }
+    }
+}
+
 if (!function_exists('env')) {
     /**
      * env().
