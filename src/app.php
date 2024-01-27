@@ -319,6 +319,22 @@ if (!function_exists('data_set')) {
     }
 }
 
+if (!function_exists('data_fill')) {
+    /**
+     * data_fill.
+     *
+     * @param  mixed        $target Target
+     * @param  string|array $key    Key
+     * @param  mixed        $value  Value
+     *
+     * @return string
+     */
+    function data_fill(mixed &$target, $key, mixed $value)
+    {
+        return data_set($target, $key, $value, false);
+    }
+}
+
 if (!function_exists('log_to_file')) {
     /**
      * log_to_file
