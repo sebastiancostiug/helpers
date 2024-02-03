@@ -26,7 +26,9 @@ I recomend forking it because it's purpose is for personal use and I will only m
 It contains several functions split in categories
 so far the categories are:
 
+-   app helpers (helper functions for general use in the application)
+-   console helpers (CLI helper functions)
+-   file helpers
+-   i18n helpers
 -   path helpers (several path shortcuts across the application)
 -   string helpers (several string manipulation helper functions)
--   console helpers (CLI helper functions)
--   app helpers (helper functions for general use in the application)
