@@ -2,7 +2,7 @@
 /**
  * @package     Helpers package
  *
- * @subpackage  <Paths helper functions>
+ * @subpackage  Paths helper functions
  *
  * @author      Sebastian Costiug <sebastian@overbyte.dev>
  * @copyright   2019-2023 Sebastian Costiug

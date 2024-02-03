@@ -2,7 +2,7 @@
 /**
  * @package     Helpers package
  *
- * @subpackage  <String manipulation helper functions>
+ * @subpackage  String manipulation helper functions
  *
  * @author      Sebastian Costiug <sebastian@overbyte.dev>
  * @copyright   2019-2023 Sebastian Costiug

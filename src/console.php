@@ -2,7 +2,7 @@
 /**
  * @package     Helpers package
  *
- * @subpackage  <Console Helper functions>
+ * @subpackage  Console Helper functions
  *
  * @author      Sebastian Costiug <sebastian@overbyte.dev>
  * @copyright   2019-2023 Sebastian Costiug
