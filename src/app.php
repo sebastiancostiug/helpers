@@ -92,19 +92,19 @@ if (!function_exists('throw_when')) {
     /**
      * throw_when.
      *
-     * @param boolean $fails     Fails
-     * @param string  $message   Message
-     * @param string  $exception Class
+     * @param boolean $fails         Fails
+     * @param array   $exceptionInfo Message, Errors, Code, Previous
+     * @param string  $exception     Class
      *
      * @return mixed
      */
-    function throw_when(bool $fails, string $message, string $exception = Exception::class)
+    function throw_when(bool $fails, array $exceptionInfo, string $exception = Exception::class)
     {
         if (!$fails) {
             return;
         }
 
-        throw new $exception($message);
+        throw new $exception(...$exceptionInfo);
     }
 }
 
