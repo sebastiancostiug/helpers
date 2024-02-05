@@ -107,6 +107,11 @@ if (!function_exists('throw_when')) {
 
         $exceptionInfo = is_array($exceptionInfo) ? $exceptionInfo : [$exceptionInfo];
 
+        if (!class_exists($exception) && !is_subclass_of($exception, \Exception::class)) {
+            $exception = \Exception::class;
+            $exceptionInfo = [reset($exceptionInfo)];
+        }
+
         throw new $exception(...$exceptionInfo);
     }
 }
