@@ -23,16 +23,15 @@ if (!function_exists('redirect')) {
      */
     function redirect(string $url)
     {
-        throw_when(!class_exists(core\http\routing\Redirect::class), 'Redirect class not found.');
-
-        throw_when(!function_exists('app'), 'Application instance not found.');
+        throw_when(!class_exists(core\http\routing\Redirect::class), ['Redirect class not found.']);
+        throw_when(!function_exists('app'), ['Application instance not found.']);
 
         try {
             $redirect = app()->resolve(core\http\routing\Redirect::class);
 
             return $redirect($url);
         } catch (\Throwable $th) {
-            throw_when(true, $th->getMessage());
+            throw_when(true, [$th->getMessage()]);
         }
     }
 }
@@ -50,7 +49,7 @@ if (!function_exists('env')) {
     {
         $value = getenv($key);
 
-        throw_when(!$value && ($default === false), "{$key} .env variable not set.");
+        throw_when(!$value && ($default === false), ["{$key} .env variable not set."]);
 
         return $value ? $value : $default;
     }
@@ -141,12 +140,12 @@ if (!function_exists('config')) {
         $coreConfigFiles = array_slice($coreFolder, 2, count($coreFolder));
 
         foreach ($coreConfigFiles as $file) {
-            throw_when(str_after($file, '.') !== 'php', 'Config files must be .php files.');
+            throw_when(str_after($file, '.') !== 'php', ['Config files must be .php files.']);
             data_set($config, str_before($file, '.php'), require core_path("config/$file"));
         }
 
         foreach ($configFiles as $file) {
-            throw_when(str_after($file, '.') !== 'php', 'Config files must be .php files.');
+            throw_when(str_after($file, '.') !== 'php', ['Config files must be .php files.']);
             if (isset($config[str_before($file, '.php')])) {
                 $config[str_before($file, '.php')] = array_replace_recursive($config[str_before($file, '.php')], require config_path($file));
             } else {

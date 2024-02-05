@@ -237,7 +237,7 @@ if (!function_exists('classes_from_path')) {
      */
     function classes_from_path($path)
     {
-        throw_when(!file_exists($path), "Path {$path} does not exist");
+        throw_when(!file_exists($path), ["Path {$path} does not exist"]);
 
         $classes = [];
         $handle = opendir($path);
