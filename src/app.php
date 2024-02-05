@@ -91,17 +91,21 @@ if (!function_exists('throw_when')) {
     /**
      * throw_when.
      *
-     * @param boolean $fails         Fails
-     * @param array   $exceptionInfo Message, Errors, Code, Previous
-     * @param string  $exception     Class
+     * @param boolean      $fails         Fails
+     * @param array|string $exceptionInfo An array of [message, errors, code, previous] in this order OR just a string message
+     * @param string       $exception     Exception class to be thrown
      *
-     * @return mixed
+     * @return void
+     *
+     * @throws Exception If fails is true
      */
-    function throw_when(bool $fails, array $exceptionInfo, string $exception = Exception::class)
+    function throw_when(bool $fails, array|string $exceptionInfo, string $exception = Exception::class)
     {
         if (!$fails) {
             return;
         }
+
+        $exceptionInfo = is_array($exceptionInfo) ? $exceptionInfo : [$exceptionInfo];
 
         throw new $exception(...$exceptionInfo);
     }
@@ -117,9 +121,9 @@ if (!function_exists('class_basename')) {
      */
     function class_basename($class)
     {
-            $class = is_object($class) ? get_class($class) : $class;
+        $class = is_object($class) ? get_class($class) : $class;
 
-            return basename(str_replace('\\', '/', $class ?? ''));
+        return basename(str_replace('\\', '/', $class ?? ''));
     }
 }
 
