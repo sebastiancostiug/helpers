@@ -511,6 +511,60 @@ if (!function_exists('call_api')) {
         ];
     }
 
+    if (!function_exists('is_api_client')) {
+        /**
+         * is_api_client
+         *
+         * @return boolean
+         */
+        function is_api_client()
+        {
+            // List of known API clients
+            $apiClients = ['Insomnia', 'Thunder Client', 'Postman', 'curl', 'wget', 'httpie', 'Paw', 'SoapUI', 'Restlet', 'Fiddler', 'Charles', 'Advanced REST Client', 'ARC', 'HTTP Toolkit', 'Hoppscotch'];
+
+            // List of known web browsers
+            $browsers = ['Mozilla', 'Chrome', 'Safari', 'Opera', 'MSIE', 'Edge', 'Firefox', 'Netscape', 'Konqueror', 'Lynx', 'Links', 'w3m'];
+
+            // Check if the 'Accept' header is set to 'application/json'
+            if (isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false) {
+                return true;
+            }
+
+            // Check if the 'Content-Type' header is set to 'application/json'
+            if (isset($_SERVER['CONTENT_TYPE']) && strpos($_SERVER['CONTENT_TYPE'], 'application/json') !== false) {
+                return true;
+            }
+
+            // Check if a custom 'X-API-Client' header is set
+            if (isset($_SERVER['HTTP_X_API_CLIENT'])) {
+                return true;
+            }
+
+            // Check if a 'api_client' parameter is included in the request URL
+            if (isset($_GET['api_client'])) {
+                return true;
+            }
+
+            // Check if the 'User-Agent' header contains the name of known API clients
+            $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+            foreach ($apiClients as $client) {
+                if (stripos($userAgent, $client) !== false) {
+                    return true;
+                }
+            }
+
+            // Check if the 'User-Agent' header contains the name of known web browsers
+            foreach ($browsers as $browser) {
+                if (stripos($userAgent, $browser) !== false) {
+                    return false;
+                }
+            }
+
+            // If none of the above checks passed, assume the request is not from an API client
+            return false;
+        }
+    }
+
     if (!function_exists('get_client_ip')) {
         /**
          * get_client_ip
