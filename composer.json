@@ -24,6 +24,7 @@
     "autoload": {
         "files": [
             "./src/app.php",
+            "./src/array.php",
             "./src/console.php",
             "./src/file.php",
             "./src/i18n.php",
