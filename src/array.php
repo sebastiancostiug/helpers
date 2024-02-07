@@ -56,7 +56,9 @@ if (!function_exists('array_additive_merge')) {
         $result = $array1;
 
         foreach ($array2 as $key => $value) {
-            if (is_array($value) && isset($result[$key]) && is_array($result[$key])) {
+            if (is_numeric($key)) {
+                $result[] = $value;
+            } elseif (is_array($value) && isset($result[$key]) && is_array($result[$key])) {
                 $result[$key] = array_additive_merge($result[$key], $value);
             } else {
                 $result[$key] = $value;
