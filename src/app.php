@@ -69,7 +69,7 @@ if (!function_exists('dev_env')) {
 
 if (!function_exists('dd')) {
     /**
-     * Die and dump.
+     * Dump & die.
      *
      * @param string $content The content to be dumped
      *
@@ -84,6 +84,25 @@ if (!function_exists('dd')) {
             echo '<hr>';
         }, func_get_args());
         die;
+    }
+}
+
+if (!function_exists('dwd')) {
+    /**
+     * Dump without die.
+     *
+     * @param string $content The content to be dumped
+     *
+     * @return void
+     */
+    function dwd($content)
+    {
+        array_map(function ($content) {
+            echo '<pre>';
+            var_dump($content);
+            echo '</pre>';
+            echo '<hr>';
+        }, func_get_args());
     }
 }
 
