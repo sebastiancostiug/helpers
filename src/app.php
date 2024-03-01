@@ -464,7 +464,7 @@ if (!function_exists('call_api')) {
         curl_setopt($curlHandle, CURLOPT_FRESH_CONNECT, true);
         curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curlHandle, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($curlHandle, CURLOPT_USERAGENT, config('name'));
+        curl_setopt($curlHandle, CURLOPT_USERAGENT, env('APP_NAME', 'Slim 4 Base'));
         curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT, 3);
         curl_setopt($curlHandle, CURLOPT_TIMEOUT, 10);
 
