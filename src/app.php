@@ -164,6 +164,26 @@ if (!function_exists('config')) {
     }
 }
 
+if (!function_exists('configure')) {
+    /**
+     * configure.
+     *
+     * @param object $object Object
+     * @param array  $config Config
+     *
+     * @return object
+     */
+    function configure(object $object, array $config)
+    {
+        foreach ($config as $key => $value) {
+            $object->{$key} = $value;
+        }
+
+        return $object;
+    }
+
+}
+
 if (!function_exists('accessible')) {
     /**
      * Determine whether the given value is array accessible.
