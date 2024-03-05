@@ -73,6 +73,20 @@ if (!function_exists('config_path')) {
     }
 }
 
+if (!function_exists('assets_path')) {
+    /**
+     * assets_path().
+     *
+     * @param string $path Database path detail
+     *
+     * @return string
+     */
+    function assets_path($path = '')
+    {
+        return app_path("assets/{$path}");
+    }
+}
+
 if (!function_exists('modules_path')) {
     /**
      * modules_path().
