@@ -192,3 +192,28 @@ if (!function_exists('pluralize')) {
         }
     }
 }
+
+if (!function_exists('singularize')) {
+    /**
+     * singularize.
+     *
+     * @param string $string String
+     * @return string
+     */
+    function singularize($string)
+    {
+        $lastLetter = strtolower($string[strlen($string) - 1]);
+        switch ($lastLetter) {
+            case 's':
+                if (substr($string, -3) === 'ies') {
+                    return substr($string, 0, -3) . 'y';
+                } elseif (substr($string, -2) === 'es') {
+                    return substr($string, 0, -2);
+                } else {
+                    return substr($string, 0, -1);
+                }
+            default:
+                return $string;
+        }
+    }
+}
