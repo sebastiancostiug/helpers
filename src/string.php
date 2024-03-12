@@ -217,3 +217,17 @@ if (!function_exists('singularize')) {
         }
     }
 }
+
+if (!function_exists('split_camelCase')) {
+    /**
+     * split_camelCase
+     *
+     * @param string $string The string to split.
+     * @return array The split string, with all elements in lowercase.
+     */
+    function split_camelCase($string)
+    {
+        $splitString = preg_split('/(?<=\\w)(?=[A-Z])/', $string);
+        return array_map('strtolower', $splitString);
+    }
+}
