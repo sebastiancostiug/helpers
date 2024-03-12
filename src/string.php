@@ -171,3 +171,24 @@ if (!function_exists('replace_diacritics')) {
         return str_replace($diacritics, $non_diacritics, $string);
     }
 }
+
+if (!function_exists('pluralize')) {
+    /**
+     * pluralize.
+     *
+     * @param string $string String
+     * @return string
+     */
+    function pluralize($string)
+    {
+        $lastLetter = strtolower($string[strlen($string) - 1]);
+        switch ($lastLetter) {
+            case 'y':
+                return substr($string, 0, -1) . 'ies';
+            case 's':
+                return $string . 'es';
+            default:
+                return $string . 's';
+        }
+    }
+}
