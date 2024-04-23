@@ -373,6 +373,9 @@ if (!function_exists('log_to_file')) {
     function log_to_file($file, mixed ...$messages)
     {
         $file = runtime_path('logs') . DIRECTORY_SEPARATOR . $file . '.log';
+        if (!is_dir(dirname($file)) && !mkdir(dirname($file), 0755, true)) {
+            throw new Exception('Could not create log folder. Please check permissions.');
+        }
 
         $message = date('Y-m-d H:i:s') . PHP_EOL . implode(PHP_EOL, $messages) . PHP_EOL . '----------' . PHP_EOL . PHP_EOL;
 
