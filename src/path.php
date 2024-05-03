@@ -41,24 +41,6 @@ if (!function_exists('app_path')) {
     }
 }
 
-if (!function_exists('core_path')) {
-    /**
-     * core_path().
-     *
-     * @param string $path Core path detail
-     *
-     * @return string
-     */
-    function core_path($path = '')
-    {
-        if (file_exists(base_path("vendor/sebastiancostiug/core/src/{$path}"))) {
-            return base_path("vendor/sebastiancostiug/core/src/{$path}");
-        } else {
-            return app_path("{$path}");
-        }
-    }
-}
-
 if (!function_exists('config_path')) {
     /**
      * config_path().
