@@ -141,14 +141,6 @@ if (!function_exists('config')) {
         $config = [];
         $folder = scandir(config_path());
         $configFiles = array_slice($folder, 2, count($folder));
-        $coreFolder = scandir(app_path('core/config'));
-        $coreConfigFiles = array_slice($coreFolder, 2, count($coreFolder));
-
-        foreach ($coreConfigFiles as $file) {
-            throw_when(str_after($file, '.') !== 'php', ['Config files must be .php files.']);
-
-            data_set($config, str_before($file, '.php'), require app_path("core/config/$file"));
-        }
 
         foreach ($configFiles as $file) {
             throw_when(str_after($file, '.') !== 'php', ['Config files must be .php files.']);
