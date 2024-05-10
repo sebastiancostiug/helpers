@@ -586,24 +586,30 @@ if (!function_exists('call_api')) {
          */
         function get_client_ip()
         {
-            $ipaddress = '';
-            if (isset($_SERVER['HTTP_CLIENT_IP'])) {
-                $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
-            } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-                $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
-            } elseif (isset($_SERVER['HTTP_X_FORWARDED'])) {
-                $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
-            } elseif (isset($_SERVER['HTTP_FORWARDED_FOR'])) {
-                $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
-            } elseif (isset($_SERVER['HTTP_FORWARDED'])) {
-                $ipaddress = $_SERVER['HTTP_FORWARDED'];
-            } elseif (isset($_SERVER['REMOTE_ADDR'])) {
-                $ipaddress = $_SERVER['REMOTE_ADDR'];
-            } else {
-                $ipaddress = 'UNKNOWN';
+            dd($_SERVER['HTTP_X_FORWARDED_FOR'], $_SERVER['HTTP_X_REAL_IP'], $_SERVER['REMOTE_ADDR']);
+            if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+                return $_SERVER['HTTP_CLIENT_IP'];
+            }
+            if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                return $_SERVER['HTTP_X_FORWARDED_FOR'];
+            }
+            if (!empty($_SERVER['HTTP_X_FORWARDED'])) {
+                return $_SERVER['HTTP_X_FORWARDED'];
+            }
+            if (!empty($_SERVER['HTTP_X_CLUSTER_CLIENT_IP'])) {
+                return $_SERVER['HTTP_X_CLUSTER_CLIENT_IP'];
+            }
+            if (!empty($_SERVER['HTTP_FORWARDED_FOR'])) {
+                return $_SERVER['HTTP_FORWARDED_FOR'];
+            }
+            if (!empty($_SERVER['HTTP_FORWARDED'])) {
+                return $_SERVER['HTTP_FORWARDED'];
+            }
+            if (!empty($_SERVER['REMOTE_ADDR'])) {
+                return $_SERVER['REMOTE_ADDR'];
             }
 
-            return $ipaddress;
+            return 'UNKNOWN';
         }
     }
 }

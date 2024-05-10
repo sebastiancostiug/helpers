@@ -165,10 +165,14 @@ if (!function_exists('replace_diacritics')) {
      */
     function replace_diacritics($string)
     {
-        $diacritics     = explode(',', 'Ă,Â,Î,Ş,Ș,Ţ,Ț,ă,â,î,ş,ș,ţ,ț,ä,Ä,ß,ë,Ë,ö,Ö,ü,Ü');
-        $non_diacritics = explode(',', 'A,A,I,S,S,T,T,a,a,i,s,s,t,t,ae,AE,ss,ee,EE,oe,OE,ue,UE');
+        // $diacritics     = explode(',', 'Ă,Â,Î,Ş,Ș,Ţ,Ț,ă,â,î,ş,ș,ţ,ț,ä,Ä,ß,ë,Ë,ö,Ö,ü,Ü');
+        // $non_diacritics = explode(',', 'A,A,I,S,S,T,T,a,a,i,s,s,t,t,ae,AE,ss,ee,EE,oe,OE,ue,UE');
 
-        return str_replace($diacritics, $non_diacritics, $string);
+        // return str_replace($diacritics, $non_diacritics, $string);
+        setlocale(LC_ALL, 'en_US.UTF8');
+        $result = iconv('UTF-8', 'ASCII//TRANSLIT', $string ?? '');
+
+        return $result;
     }
 }
 
