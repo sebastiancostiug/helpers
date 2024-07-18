@@ -1,5 +1,5 @@
 {
-    "name": "sebastiancostiug/helpers",
+    "name": "overbyte/shared",
     "description": "A collection of general helpers",
     "authors": [
         {
@@ -12,8 +12,9 @@
     "prefer-stable": true,
     "version": "0.0.1",
     "license": "BSD-3-Clause",
-    "type": "helpers",
+    "type": "library",
     "keywords": [
+        "common",
         "helpers",
         "general",
         "php"
@@ -23,13 +24,13 @@
     },
     "autoload": {
         "files": [
-            "./src/app.php",
-            "./src/array.php",
-            "./src/console.php",
-            "./src/file.php",
-            "./src/i18n.php",
-            "./src/path.php",
-            "./src/string.php"
+            "./src/helpers/app.php",
+            "./src/helpers/array.php",
+            "./src/helpers/console.php",
+            "./src/helpers/file.php",
+            "./src/helpers/i18n.php",
+            "./src/helpers/path.php",
+            "./src/helpers/string.php"
         ]
     }
 }
