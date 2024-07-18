@@ -141,14 +141,6 @@ if (!function_exists('config')) {
         $config = [];
         $folder = scandir(config_path());
         $configFiles = array_slice($folder, 2, count($folder));
-        $coreFolder = scandir(core_path('config'));
-        $coreConfigFiles = array_slice($coreFolder, 2, count($coreFolder));
-
-        foreach ($coreConfigFiles as $file) {
-            throw_when(str_after($file, '.') !== 'php', ['Config files must be .php files.']);
-
-            data_set($config, str_before($file, '.php'), require core_path("config/$file"));
-        }
 
         foreach ($configFiles as $file) {
             throw_when(str_after($file, '.') !== 'php', ['Config files must be .php files.']);
@@ -373,6 +365,9 @@ if (!function_exists('log_to_file')) {
     function log_to_file($file, mixed ...$messages)
     {
         $file = runtime_path('logs') . DIRECTORY_SEPARATOR . $file . '.log';
+        if (!is_dir(dirname($file)) && !mkdir(dirname($file), 0755, true)) {
+            throw new Exception('Could not create log folder. Please check permissions.');
+        }
 
         $message = date('Y-m-d H:i:s') . PHP_EOL . implode(PHP_EOL, $messages) . PHP_EOL . '----------' . PHP_EOL . PHP_EOL;
 
@@ -591,24 +586,30 @@ if (!function_exists('call_api')) {
          */
         function get_client_ip()
         {
-            $ipaddress = '';
-            if (isset($_SERVER['HTTP_CLIENT_IP'])) {
-                $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
-            } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-                $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
-            } elseif (isset($_SERVER['HTTP_X_FORWARDED'])) {
-                $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
-            } elseif (isset($_SERVER['HTTP_FORWARDED_FOR'])) {
-                $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
-            } elseif (isset($_SERVER['HTTP_FORWARDED'])) {
-                $ipaddress = $_SERVER['HTTP_FORWARDED'];
-            } elseif (isset($_SERVER['REMOTE_ADDR'])) {
-                $ipaddress = $_SERVER['REMOTE_ADDR'];
-            } else {
-                $ipaddress = 'UNKNOWN';
+            dd($_SERVER['HTTP_X_FORWARDED_FOR'], $_SERVER['HTTP_X_REAL_IP'], $_SERVER['REMOTE_ADDR']);
+            if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+                return $_SERVER['HTTP_CLIENT_IP'];
+            }
+            if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                return $_SERVER['HTTP_X_FORWARDED_FOR'];
+            }
+            if (!empty($_SERVER['HTTP_X_FORWARDED'])) {
+                return $_SERVER['HTTP_X_FORWARDED'];
+            }
+            if (!empty($_SERVER['HTTP_X_CLUSTER_CLIENT_IP'])) {
+                return $_SERVER['HTTP_X_CLUSTER_CLIENT_IP'];
+            }
+            if (!empty($_SERVER['HTTP_FORWARDED_FOR'])) {
+                return $_SERVER['HTTP_FORWARDED_FOR'];
+            }
+            if (!empty($_SERVER['HTTP_FORWARDED'])) {
+                return $_SERVER['HTTP_FORWARDED'];
+            }
+            if (!empty($_SERVER['REMOTE_ADDR'])) {
+                return $_SERVER['REMOTE_ADDR'];
             }
 
-            return $ipaddress;
+            return 'UNKNOWN';
         }
     }
 }
