@@ -15,7 +15,7 @@
  *
  */
 
-namespace overbyte\shared\common;
+namespace overbyte\common;
 
 /**
  * Implements the Singleton design pattern, allowing only one instance of a class to be created.

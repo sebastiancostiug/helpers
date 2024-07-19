@@ -15,9 +15,9 @@
  *
  */
 
-namespace overbyte\shared\common;
+namespace overbyte\common;
 
-use overbyte\shared\common\Filesystem;
+use overbyte\common\Filesystem;
 
 /**
  * Class Fileloader

@@ -23,6 +23,9 @@
         "php": "^8.3"
     },
     "autoload": {
+        "psr-4": {
+            "overbyte\\common\\": "./src/common"
+        },
         "files": [
             "./src/helpers/app.php",
             "./src/helpers/array.php",

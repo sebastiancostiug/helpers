@@ -14,7 +14,7 @@
  *
  */
 
-namespace overbyte\shared\common;
+namespace overbyte\common;
 
 /**
  * Class Formatter

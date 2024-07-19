@@ -13,7 +13,7 @@
  * @since       2024-02-05
  */
 
-namespace overbyte\shared\common;
+namespace overbyte\common;
 
 /**
  * Exception class

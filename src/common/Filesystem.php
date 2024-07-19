@@ -15,7 +15,7 @@
  *
  */
 
-namespace overbyte\shared\common;
+namespace overbyte\common;
 
 /**
  * Represents a file system component.
