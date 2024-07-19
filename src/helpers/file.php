@@ -13,6 +13,31 @@
  * @since       2023.11.14
  */
 
+if(!function_exists('get_files')) {
+    /**
+     * getFiles
+     *
+     * @param string $path The path where to search for files
+     *
+     * @return array
+     */
+    function get_files($path)
+    {
+        $files = [];
+
+        $directory = new RecursiveDirectoryIterator($path, RecursiveDirectoryIterator::SKIP_DOTS);
+        $iterator = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::SELF_FIRST);
+
+        foreach ($iterator as $info) {
+            if ($info->isFile()) {
+                $files[] = $info->getRealPath();
+            }
+        }
+
+        return $files;
+    }
+}
+
 if (!function_exists('remove_dirs')) {
 /**
      * removeDirs
