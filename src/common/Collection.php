@@ -74,9 +74,9 @@ class Collection
      *
      * @param mixed $key The key of the item to retrieve.
      *
-     * @return mixed|null The item value if found, null otherwise.
+     * @return mixed The item value if found, null otherwise.
      */
-    public function get(mixed $key): ?mixed
+    public function get(mixed $key): mixed
     {
         return $this->items[$key] ?? null;
     }
@@ -300,9 +300,9 @@ class Collection
      * @param  mixed   $value  The value to search for.
      * @param  boolean $strict Whether to use strict comparison.
      *
-     * @return mixed|boolean
+     * @return mixed The key of the value if found, false otherwise.
      */
-    public function search(mixed $value, $strict = false): mixed|bool
+    public function search(mixed $value, $strict = false): mixed
     {
         if (is_callable($value)) {
             foreach ($this->items as $key => $item) {
